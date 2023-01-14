@@ -3,32 +3,37 @@
 // 82 -> 10
 // 9012 -> 12
 
-int getUserData(string message)
+int num = ReadInt("Введите число: ");
+int len = NumberLen(num);
+SumNumbers(num, len);
+int ReadInt(string message)
+
 {
     Console.ForegroundColor = ConsoleColor. DarkCyan;
-    Console.WriteLine(message);
+    Console.Write(message);
     Console.ResetColor ();
-    int userData = int.Parse(Console.ReadLine()!);
-    return userData;
+    return Convert.ToInt32(Console.ReadLine());
 }
-int getSumOfRange(int start, int end)
+int NumberLen(int a)
+{
+    int index = 0;
+    while (a > 0)
+    {
+        a /= 10;
+        index++;
+    }
+    return index;
+}
+void SumNumbers(int n, int len)
 {
     int sum = 0;
-    for (int i = start; i <= end; i++)
+    for (int i = 1; i <= len; i++)
     {
-        int num = i % 10;
-        i = i / 10;
-        sum = sum + num;
+        sum += n % 10;
+        n /= 10;
     }
-    return sum;
-}
-void showData(string messageStart, int data)
-{
-    Console.Write(messageStart);
-    Console.ForegroundColor = ConsoleColor. DarkGreen;
-    Console.Write(data);
+     Console.ForegroundColor = ConsoleColor. DarkGreen;
+    Console.Write($"сумма  цифр в чиселе {num} = "+ sum);
     Console.ResetColor(); 
 }
-int end = getUserData("Введите число");
-int sum = getSumOfRange(1,end);
-showData($"сумма  цифр в чиселе {end} = ", sum);
+
